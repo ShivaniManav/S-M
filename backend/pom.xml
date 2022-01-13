@@ -9,11 +9,82 @@
   <url>http://maven.apache.org</url>
   
   <properties>
+  	<springframework.version>5.3.8</springframework.version>
+  	<springsecurity.version>5.3.1.RELEASE</springsecurity.version>
+  	<hibernate.version>5.6.3.Final</hibernate.version>
+  	<hibernate.validator.version>6.0.7.Final</hibernate.validator.version>
+  	<mysql.connector.version>8.0.27</mysql.connector.version>
+  
 	<maven.compiler.source>1.8</maven.compiler.source>
 	<maven.compiler.target>1.8</maven.compiler.target>
   </properties>
   
   <dependencies>
+ 	<!-- Spring -->
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-webmvc</artifactId>
+		<version>${springframework.version}</version>
+	</dependency>
+
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-tx</artifactId>
+		<version>${springframework.version}</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-orm</artifactId>
+		<version>${springframework.version}</version>
+	</dependency>
+	
+	<!-- Spring Security -->
+	<dependency>
+	    <groupId>org.springframework.security</groupId>
+	    <artifactId>spring-security-web</artifactId>
+	    <version>${springsecurity.version}</version>
+	</dependency>
+	
+	<dependency>
+	    <groupId>org.springframework.security</groupId>
+	    <artifactId>spring-security-config</artifactId>
+	    <version>${springsecurity.version}</version>
+	</dependency>	
+	
+	<dependency>
+	    <groupId>org.springframework.security</groupId>
+	    <artifactId>spring-security-taglibs</artifactId>
+	    <version>${springsecurity.version}</version>
+	</dependency>
+  	
+  	<!-- Hibernate -->
+	<dependency>
+		<groupId>org.hibernate</groupId>
+		<artifactId>hibernate-core</artifactId>
+		<version>${hibernate.version}</version>
+	</dependency>
+	
+	<dependency>
+		<groupId>org.hibernate.validator</groupId>
+		<artifactId>hibernate-validator</artifactId>
+	 	<version>${hibernate.validator.version}</version>
+	</dependency>
+
+	<!-- MySQL -->
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>${mysql.connector.version}</version>
+	</dependency>
+	
+	<!-- Add Jackson for JSON converters -->
+	<dependency>
+		<groupId>com.fasterxml.jackson.core</groupId>
+		<artifactId>jackson-databind</artifactId>
+		<version>2.12.5</version>
+	</dependency>
+  
 	<!--  Servlet+JSP+JSTL  -->
 	<dependency>
 		<groupId>javax.servlet</groupId>
