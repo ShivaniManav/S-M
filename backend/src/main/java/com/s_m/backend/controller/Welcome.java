@@ -1,6 +1,6 @@
-package com.s_m.backend.api;
+package com.s_m.backend.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/welcome")
 public class Welcome {
 	
-	@GetMapping("/hello")
+	@PostMapping("/hello")
 	public String message() {
 		return "welcome";
 	}

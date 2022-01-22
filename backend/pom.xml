@@ -14,6 +14,7 @@
   	<hibernate.version>5.6.3.Final</hibernate.version>
   	<hibernate.validator.version>6.0.7.Final</hibernate.validator.version>
   	<mysql.connector.version>8.0.27</mysql.connector.version>
+  	<jwt.version>0.11.2</jwt.version>
   
 	<maven.compiler.source>1.8</maven.compiler.source>
 	<maven.compiler.target>1.8</maven.compiler.target>
@@ -57,6 +58,32 @@
 	    <artifactId>spring-security-taglibs</artifactId>
 	    <version>${springsecurity.version}</version>
 	</dependency>
+	
+	<!-- JWT -->
+	<dependency>
+	    <groupId>io.jsonwebtoken</groupId>
+	    <artifactId>jjwt-api</artifactId>
+	    <version>${jwt.version}</version>
+	</dependency>
+	<dependency>
+	    <groupId>io.jsonwebtoken</groupId>
+	    <artifactId>jjwt-impl</artifactId>
+	    <version>${jwt.version}</version>
+	    <scope>runtime</scope>
+	</dependency>
+	<dependency>
+	    <groupId>io.jsonwebtoken</groupId>
+	    <artifactId>jjwt-jackson</artifactId> <!-- or jjwt-gson if Gson is preferred -->
+	    <version>${jwt.version}</version>
+	    <scope>runtime</scope>
+	</dependency>
+	<dependency>
+	    <groupId>org.bouncycastle</groupId>
+	    <artifactId>bcprov-jdk15on</artifactId>
+	    <version>1.60</version>
+	    <scope>runtime</scope>
+	</dependency>
+	
   	
   	<!-- Hibernate -->
 	<dependency>
