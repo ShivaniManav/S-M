@@ -18,7 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.s_m.backend.config.utility.JWTUtil;
+import com.s_m.backend.utility.JWTUtil;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;

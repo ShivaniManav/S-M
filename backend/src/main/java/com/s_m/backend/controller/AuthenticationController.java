@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.s_m.backend.config.model.JwtAuthResponse;
-import com.s_m.backend.config.model.LoginRequest;
-import com.s_m.backend.config.utility.JWTUtil;
 import com.s_m.backend.entity.User;
+import com.s_m.backend.model.JwtAuthResponse;
+import com.s_m.backend.model.LoginRequest;
 import com.s_m.backend.service.UserService;
+import com.s_m.backend.utility.JWTUtil;
 
 @RestController
 @RequestMapping("auth")

@@ -1,4 +1,4 @@
-package com.s_m.backend.config.utility;
+package com.s_m.backend.utility;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
