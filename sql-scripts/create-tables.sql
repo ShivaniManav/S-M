@@ -38,7 +38,23 @@ CREATE TABLE IF NOT EXISTS `users_roles` (
 )
 
 CREATE TABLE IF NOT EXISTS user_address (
-
+	id INT(11) AUTO_INCREMENT,
+	fk_user_id INT(11),
+	full_name VARCHAR(100) NOT NULL,
+	mobile VARCHAR(50) NOT NULL,
+	address_line1 VARCHAR(255) NOT NULL,
+	address_line2 VARCHAR(255) DEFAULT '',
+	landmark VARCHAR(255) DEFAULT '',
+	city VARCHAR(50) NOT NULL,
+	pincode VARCHAR(50) NOT NULL,
+	`state` VARCHAR(50) NOT NULL,
+	country VARCHAR(50) NOT NULL,
+	is_default TINYINT(1) DEFAULT 0,
+	
+	PRIMARY KEY (`id`),
+	
+	CONSTRAINT `FK_USER_ADDR_ID` FOREIGN KEY (fk_user_id)
+	REFERENCES `user`(`id`)
 );
 
 CREATE TABLE IF NOT EXISTS user_payment (
