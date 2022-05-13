@@ -44,14 +44,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf()
 		        .disable()
 		        .authorizeRequests()
-		        .antMatchers("/auth/**")
-		        .permitAll()
+		        .antMatchers("/auth/register").permitAll()
+		        .antMatchers("/auth/login").permitAll()
+		        .antMatchers("/welcome/hello").permitAll()
 		        .anyRequest()
 		        .authenticated()
 		        .and()
 		        .sessionManagement()
 		        .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		
 		http.addFilterBefore(jwtTokenVerifier, UsernamePasswordAuthenticationFilter.class);
+		
+		http.cors();
 	}
 
 	@Bean

@@ -17,7 +17,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.s_m.backend.model.LoginRequest;
+import com.s_m.backend.request.LoginRequest;
 import com.s_m.backend.service.UserService;
 import com.s_m.backend.utility.JWTUtil;
 

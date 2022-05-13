@@ -1,4 +1,4 @@
-package com.s_m.backend.model;
+package com.s_m.backend.response;
 
 public class JwtAuthResponse {
 	

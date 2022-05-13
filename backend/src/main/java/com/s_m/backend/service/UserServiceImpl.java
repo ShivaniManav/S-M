@@ -16,9 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import com.s_m.backend.dao.RoleDao;
+import com.s_m.backend.dao.UserAddressDao;
 import com.s_m.backend.dao.UserDao;
 import com.s_m.backend.entity.Role;
 import com.s_m.backend.entity.User;
+import com.s_m.backend.entity.UserAddress;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,6 +30,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private RoleDao roleDao;
+	
+	@Autowired
+	private UserAddressDao userAddressDao;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -55,14 +60,27 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
+	public void updateDefaultAddress(int userId, int addrId) {
+		userAddressDao.updateDefaultAddress(userId, addrId);
+	}
+
+	@Override
+	@Transactional
 	public void save(User user) {
 		//TODO: Add role name according to user registration
 		user.setActive(1);
 		user.setCreatedAt(new Date());
 		user.setModifiedAt(new Date());
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_CUSTOMER")));
+		// user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_CUSTOMER")));
 		userDao.save(user);
+	}
+
+	@Override
+	@Transactional
+	public void saveUserAddress(UserAddress userAddress) {
+		
+		userAddressDao.save(userAddress);
 	}
 	
 }

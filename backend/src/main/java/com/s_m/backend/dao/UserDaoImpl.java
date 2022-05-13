@@ -3,6 +3,7 @@ package com.s_m.backend.dao;
 
 import javax.persistence.Query;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,10 @@ public class UserDaoImpl implements UserDao {
 		
 		try {
 			user = (User)query.getSingleResult();
+			// Hibernate.initialize(user.getUserAddresses());
+			// Hibernate.initialize(user.getRoles());
 		} catch (Exception e) {
 			System.out.println(e.toString());
-			user = null;
 		}
 		
 		return user;

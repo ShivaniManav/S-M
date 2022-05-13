@@ -1,5 +1,7 @@
 package com.s_m.backend.entity;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -13,13 +15,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,11 +62,26 @@ public class User {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date modifiedAt;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH},fetch = FetchType.EAGER)
 	@JoinTable(name = "users_roles",
 				joinColumns = @JoinColumn(name = "user_id"),
 				inverseJoinColumns = @JoinColumn(name = "role_id"))
+	//@JsonIgnoreProperties
 	private Collection<Role> roles;
+	
+	
+	/*
+	 * @JsonBackReference helps in keeping lazy initialization feature because
+	 * jackson would want userAddressses to be present at the time of response but
+	 * because of lazy initialization it won't be available at that time.
+	 * hence it ignores this property at the time of response and hence keeps the lazy nature.
+	 * for more info {@link JsonBackReference}
+	 */	
+	// @OneToMany(mappedBy = "fkUser", cascade = CascadeType.ALL)
+	@JsonBackReference
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_user_id")
+	private Collection<UserAddress> userAddresses;
 	
 	public User() {
 		
@@ -77,11 +99,11 @@ public class User {
 		this.active = active;
 		this.createdAt = createdAt;
 		this.modifiedAt = modifiedAt;
+		userAddresses = new ArrayList<UserAddress>();
 	}
 
 	public User(long id, String username, String password, String firstName, String lastName, String email,
 			String mobile, int active, Date createdAt, Date modifiedAt, Collection<Role> roles) {
-		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -93,6 +115,7 @@ public class User {
 		this.createdAt = createdAt;
 		this.modifiedAt = modifiedAt;
 		this.roles = roles;
+		userAddresses = new ArrayList<UserAddress>();
 	}
 
 	public long getId() {
@@ -181,6 +204,23 @@ public class User {
 
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
+	}
+	
+	public Collection<UserAddress> getUserAddresses() {
+		return userAddresses;
+	}
+
+	public void setUserAddresses(Collection<UserAddress> userAddresses) {
+		this.userAddresses = userAddresses;
+	}
+	
+	public void addUserAddress(UserAddress userAddress) {
+		if(userAddresses == null) {
+			userAddresses = new ArrayList<>();
+		}
+		userAddresses.add(userAddress);
+		
+		userAddress.setFkUser(this.getId());
 	}
 
 	@Override
