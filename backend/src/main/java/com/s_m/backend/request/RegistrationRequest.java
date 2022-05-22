@@ -1,31 +1,36 @@
 package com.s_m.backend.request;
 
+import java.util.Collection;
+
+import com.s_m.backend.entity.Role;
+
 public class RegistrationRequest {
 	
 	private String username;
 	
 	private String password;
 	
-	private String mobile;
+	private String firstName;
+	
+	private String lastName;
 	
 	private String email;
 	
-	private String first_name;
+	private String mobile;
 	
-	private String last_name;
-	
-	public RegistrationRequest() {
-		
-	}
+	private Collection<Role> roles;
 
-	public RegistrationRequest(String username, String password, String mobile, String email, String first_name,
-			String last_name) {
+	public RegistrationRequest() {}
+	
+	public RegistrationRequest(String username, String password, String firstName, String lastName, String email,
+			String mobile, Collection<Role> roles) {
 		this.username = username;
 		this.password = password;
-		this.mobile = mobile;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
-		this.first_name = first_name;
-		this.last_name = last_name;
+		this.mobile = mobile;
+		this.roles = roles;
 	}
 
 	public String getUsername() {
@@ -44,12 +49,20 @@ public class RegistrationRequest {
 		this.password = password;
 	}
 
-	public String getMobile() {
-		return mobile;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getEmail() {
@@ -60,20 +73,20 @@ public class RegistrationRequest {
 		this.email = email;
 	}
 
-	public String getFirst_name() {
-		return first_name;
+	public String getMobile() {
+		return mobile;
 	}
 
-	public void setFirst_name(String first_name) {
-		this.first_name = first_name;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 
-	public String getLast_name() {
-		return last_name;
+	public Collection<Role> getRoles() {
+		return roles;
 	}
 
-	public void setLast_name(String last_name) {
-		this.last_name = last_name;
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
 	}
 	
 }

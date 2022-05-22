@@ -10,6 +10,8 @@ public interface UserService extends UserDetailsService {
 	
 	User findByUserName(String userName);
 	
+	User findByEmail(String email);
+	
 	void updateDefaultAddress(int userId, int addrId);
 	
 	void saveUserAddress(UserAddress userAddress);

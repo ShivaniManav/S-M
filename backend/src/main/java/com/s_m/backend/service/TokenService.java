@@ -8,4 +8,10 @@ public interface TokenService {
 	
 	boolean isTokenInBlacklist(String token);
 
+	public void generatePasswordResetToken(String email, String token);
+	
+	public String getEmailByPasswordResetToken(String token);
+
+	public void deletePasswordResetToken(String token);
+	
 }

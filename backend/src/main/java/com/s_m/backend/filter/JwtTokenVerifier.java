@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,6 +19,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.s_m.backend.service.TokenService;
+import com.s_m.backend.utility.CookieUtil;
 import com.s_m.backend.utility.JWTUtil;
 
 import io.jsonwebtoken.Claims;
@@ -30,6 +30,9 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 
 	@Autowired
 	private JWTUtil jwtUtil;
+	
+	@Autowired
+	private CookieUtil cookieUtil;
 	
 	@Autowired
 	private TokenService tokenService;
@@ -51,21 +54,12 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 		
 		
 		String path = request.getServletPath();
-		if(path.equals("/auth/login") || path.equals("/auth/register")) {
+		if(path.equals("/auth/login") || path.equals("/auth/register") || path.equals("/auth/forgot-password-email") || path.equals("/auth/validate-forgot-password-otp") || path.equals("/auth/forgot-password")) {
 			filterChain.doFilter(request, response);
 			return;
 		}
-
-		Cookie[] cookies = request.getCookies();
-		String token = null;
-
-		if (cookies != null) {
-			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("access_token")) {
-					token = cookie.getValue();
-				}
-			}
-		}
+		
+		String token = cookieUtil.getAccessTokenFromCookie(request.getCookies());
 
 		if (token == null || token.equals("")) {
 			filterChain.doFilter(request, response);

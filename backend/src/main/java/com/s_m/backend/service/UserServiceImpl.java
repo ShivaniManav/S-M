@@ -49,30 +49,35 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+		
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 	}
 
 	@Override
 	@Transactional
 	public User findByUserName(String userName) {
+		
 		return userDao.findByUserName(userName);
 	}
 
 	@Override
 	@Transactional
+	public User findByEmail(String email) {
+		
+		return userDao.findByEmail(email);
+	}
+
+	@Override
+	@Transactional
 	public void updateDefaultAddress(int userId, int addrId) {
+		
 		userAddressDao.updateDefaultAddress(userId, addrId);
 	}
 
 	@Override
 	@Transactional
 	public void save(User user) {
-		//TODO: Add role name according to user registration
-		user.setActive(1);
-		user.setCreatedAt(new Date());
-		user.setModifiedAt(new Date());
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		// user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_CUSTOMER")));
+		
 		userDao.save(user);
 	}
 

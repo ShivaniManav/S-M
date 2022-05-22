@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 public class TokenDaoImpl implements TokenDao {
 	
 	private static final String TOKEN_BLACKLIST_KEY_PREFIX = "sm::tbl::";
+	private static final String PWD_RESET_TOKEN_KEY_PREFIX = "sm::prt::";
 	
 	@Autowired
 	RedisTemplate<String, Object> redisTemplate;
@@ -26,9 +27,34 @@ public class TokenDaoImpl implements TokenDao {
 		redisTemplate.opsForValue().set(getTokenBlacklistKey(token), token, ttl, TimeUnit.SECONDS);
 	}
 	
+	@Override
+	public void generatePasswordResetToken(String email, String token) {
+		
+		redisTemplate.opsForValue().set(getPasswordResetTokenKey(token), email, 5*60*60, TimeUnit.SECONDS);
+	}
+
+	@Override
+	public String getEmailByPasswordResetToken(String token) {
+		
+		return (String) redisTemplate.opsForValue().get(getPasswordResetTokenKey(token));
+	}
+
+	@Override
+	public void deletePasswordResetToken(String token) {
+		
+		redisTemplate.delete(getPasswordResetTokenKey(token));
+	}
+
 	private String getTokenBlacklistKey(String token) {
 		
 		String key = TOKEN_BLACKLIST_KEY_PREFIX + token;
+		
+		return key;
+	}
+	
+	private String getPasswordResetTokenKey(String token) {
+		
+		String key = PWD_RESET_TOKEN_KEY_PREFIX + token;
 		
 		return key;
 	}

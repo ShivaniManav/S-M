@@ -29,4 +29,22 @@ public class TokenServiceImpl implements TokenService {
 		return getTokenFromBlacklist(token) == null ? false : true;
 	}
 
+	@Override
+	public void generatePasswordResetToken(String email, String token) {
+		
+		tokenDao.generatePasswordResetToken(email, token);
+	}
+	
+	@Override
+	public String getEmailByPasswordResetToken(String token) {
+		
+		return tokenDao.getEmailByPasswordResetToken(token);
+	}
+
+	@Override
+	public void deletePasswordResetToken(String token) {
+		
+		tokenDao.deletePasswordResetToken(token);
+	}
+	
 }

@@ -23,6 +23,7 @@
   	<servlet.jstl.version>1.2</servlet.jstl.version>
   	<jaxb.version>2.3.0</jaxb.version>
   	<junit.version>3.8.1</junit.version>
+  	<mail.version>1.6.2</mail.version>
   
 	<maven.compiler.source>1.8</maven.compiler.source>
 	<maven.compiler.target>1.8</maven.compiler.target>
@@ -161,11 +162,18 @@
 	</dependency>
 	
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
-      <scope>test</scope>
+	    <groupId>junit</groupId>
+	    <artifactId>junit</artifactId>
+	    <version>${junit.version}</version>
+	    <scope>test</scope>
     </dependency>
+    
+	<dependency>
+	    <groupId>com.sun.mail</groupId>
+	    <artifactId>javax.mail</artifactId>
+	    <version>${mail.version}</version>
+	</dependency>
+
     
     <!-- <dependency>
 	    <groupId>org.apache.maven.plugins</groupId>

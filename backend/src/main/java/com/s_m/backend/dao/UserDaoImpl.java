@@ -38,6 +38,27 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
+	public User findByEmail(String email) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		
+		Query query = session.createQuery("from User where email=:uEmail", User.class);
+		query.setParameter("uEmail", email);
+		
+		User user = null;
+		
+		try {
+			
+			user = (User) query.getSingleResult();
+			
+		} catch(Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return user;
+	}
+
+	@Override
 	public void save(User user) {
 		
 		Session session = sessionFactory.getCurrentSession();
